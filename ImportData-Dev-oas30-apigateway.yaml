@@ -1,0 +1,33 @@
+openapi: "3.0.1"
+info:
+  title: "ImportData"
+  version: "2022-01-06T17:56:28Z"
+servers:
+- url: "https://gjtf9q4422.execute-api.ap-south-1.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "/Dev"
+paths:
+  /:
+    post:
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:ap-south-1:lambda:path/2015-03-31/functions/arn:aws:lambda:ap-south-1:157564564554:function:TestMe/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+components:
+  schemas:
+    Empty:
+      title: "Empty Schema"
+      type: "object"
